@@ -39,7 +39,7 @@ export const EducatorTopicsPage = () => {
             Quản lý Chủ đề Tranh biện (Giảng viên)
           </h2>
           <p className="text-sm text-[#64748B] mt-1">
-            Biên soạn kiến nghị, cung cấp tài liệu tham khảo và phát hành cho sinh viên luyện tập.
+            Quản lý chủ đề và theo dõi hoạt động luyện tập của học viên.
           </p>
         </div>
         <Button

@@ -59,7 +59,7 @@ export const MyDebatesPage = () => {
                 : 'border-transparent text-slate-500 hover:text-slate-800'
             }`}
           >
-            Với Trợ lý AI ({sessions.filter(s => s.mode === 'Với AI').length})
+            Với AI ({sessions.filter(s => s.mode === 'Với AI').length})
           </button>
           <button
             onClick={() => setActiveTab('pvp')}

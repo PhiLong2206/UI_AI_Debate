@@ -41,65 +41,122 @@ export const TopicListPage = () => {
         </p>
       </div>
 
-      {/* Search & Filters */}
-      <div className="bg-white border border-[#E2E8F0] rounded-lg p-4 shadow-subtle space-y-4">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-            <Search className="w-4 h-4" />
+      {/* Section 1: Đề xuất cho bạn */}
+      <div className="bg-white border border-blue-200/90 rounded-xl p-5 shadow-card space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-base text-[#173B67]">Đề xuất cho bạn</span>
+            <span className="text-xs bg-amber-50 text-amber-800 border border-amber-200 font-medium px-2.5 py-0.5 rounded-full">
+              Kỹ năng cần cải thiện: Dẫn chứng
+            </span>
           </div>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Tìm kiếm chủ đề theo tên hoặc nội dung..."
-            className="block w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
-          />
+          <span className="text-xs text-slate-400">Dựa trên kết quả rèn luyện gần nhất</span>
         </div>
 
-        {/* Filter Badges */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
-          {/* Categories */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="font-semibold text-slate-500 mr-1">Danh mục:</span>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  selectedCategory === cat
-                    ? 'bg-[#173B67] text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="flex items-center gap-2">
+              <Badge variant="Giáo dục">Giáo dục</Badge>
+              <Badge variant="Khó">Độ khó: Khó</Badge>
+            </div>
+            <h3 className="text-base font-bold text-[#172033]">
+              “Nên cấm sử dụng Trí tuệ nhân tạo trong các bài kiểm tra học thuật?”
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Lý do đề xuất: Chủ đề này phù hợp để bạn luyện cách sử dụng dẫn chứng và ví dụ cụ thể.
+            </p>
           </div>
 
-          {/* Difficulty */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="font-semibold text-slate-500 mr-1">Độ khó:</span>
-            {difficulties.map((diff) => (
-              <button
-                key={diff}
-                type="button"
-                onClick={() => setSelectedDifficulty(diff)}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  selectedDifficulty === diff
-                    ? 'bg-[#2563EB] text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                {diff}
-              </button>
-            ))}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate('/chu-de/tp-02')}
+            >
+              Xem chi tiết
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              icon={Play}
+              onClick={() => navigate('/tranh-bien-ai?topicId=tp-02')}
+            >
+              Luyện tập
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Topics Table List */}
-      <div className="bg-white border border-[#E2E8F0] rounded-lg shadow-card overflow-hidden">
+      {/* Section 2: Tất cả chủ đề */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-bold text-[#173B67]">
+            Tất cả chủ đề
+          </h3>
+          <span className="text-xs text-slate-500 font-medium">
+            Hiển thị {filteredTopics.length} chủ đề
+          </span>
+        </div>
+
+        {/* Search & Filters */}
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-4 shadow-subtle space-y-4">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <Search className="w-4 h-4" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Tìm kiếm chủ đề theo tên hoặc nội dung..."
+              className="block w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
+            />
+          </div>
+
+          {/* Filter Badges */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
+            {/* Categories */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-semibold text-slate-500 mr-1">Danh mục:</span>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-2.5 py-1 rounded font-medium transition-colors ${
+                    selectedCategory === cat
+                      ? 'bg-[#173B67] text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Difficulty */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-semibold text-slate-500 mr-1">Độ khó:</span>
+              {difficulties.map((diff) => (
+                <button
+                  key={diff}
+                  type="button"
+                  onClick={() => setSelectedDifficulty(diff)}
+                  className={`px-2.5 py-1 rounded font-medium transition-colors ${
+                    selectedDifficulty === diff
+                      ? 'bg-[#2563EB] text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {diff}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Topics Table List */}
+        <div className="bg-white border border-[#E2E8F0] rounded-lg shadow-card overflow-hidden">
         {filteredTopics.length === 0 ? (
           <div className="py-12 text-center">
             <p className="text-sm font-semibold text-slate-700">Không tìm thấy chủ đề phù hợp</p>
@@ -174,6 +231,7 @@ export const TopicListPage = () => {
             </table>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

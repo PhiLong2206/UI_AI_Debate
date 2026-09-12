@@ -23,6 +23,20 @@ export const DebateResultPage = () => {
   const { sessions, topics } = useApp();
 
   const [showFullTranscript, setShowFullTranscript] = useState(false);
+  const [isImprovingArgument, setIsImprovingArgument] = useState(false);
+  const [rewrittenArg, setRewrittenArg] = useState(
+    'Kính thưa ban giám khảo. Tôi xin bổ sung dẫn chứng cụ thể từ Báo cáo Sức khỏe Tinh thần Thanh thiếu niên (2025) của Viện Nghiên cứu Xã hội học: hơn 68% thanh niên lạm dụng mạng xã hội trên 4 tiếng/ngày ghi nhận triệu chứng lo âu cấp tính, chứng minh tác hại vượt trội so với lợi ích kết nối.'
+  );
+  const [reScoreLoading, setReScoreLoading] = useState(false);
+  const [isEvaluated, setIsEvaluated] = useState(false);
+
+  const handleReEvaluate = () => {
+    setReScoreLoading(true);
+    setTimeout(() => {
+      setReScoreLoading(false);
+      setIsEvaluated(true);
+    }, 600);
+  };
 
   // Find session by id or fallback to default session
   const session = sessions.find(s => s.id === id) || sessions[0];
@@ -144,6 +158,132 @@ export const DebateResultPage = () => {
             );
           })}
         </div>
+      </div>
+
+      {/* Kỹ năng cần cải thiện nhất */}
+      <div className="bg-white border border-amber-200/90 rounded-xl p-6 shadow-card space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div>
+            <h3 className="text-base font-bold text-[#173B67] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-amber-600" />
+              Kỹ năng cần cải thiện nhất
+            </h3>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-sm font-bold text-slate-800">Dẫn chứng</span>
+              <span className="text-xs font-extrabold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                6.0 / 10
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setIsImprovingArgument(true)}
+            >
+              Cải thiện lập luận
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate(`/chu-de/${session.topicId || 'tp-01'}`)}
+            >
+              Luyện lại chủ đề
+            </Button>
+          </div>
+        </div>
+
+        <p className="text-xs text-slate-600 leading-relaxed">
+          Bạn đưa ra lập luận phù hợp nhưng một số ý chưa có ví dụ hoặc dẫn chứng cụ thể để hỗ trợ.
+        </p>
+
+        {/* Interactive Argument Rewrite & Re-evaluate UI */}
+        {isImprovingArgument && (
+          <div className="mt-4 pt-4 border-t border-amber-200 bg-slate-50 p-4 rounded-lg space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#173B67]">
+              Chế độ Cải thiện & Chấm lại Lập luận
+            </div>
+
+            {/* 1. View original argument */}
+            <div className="space-y-1">
+              <div className="text-xs font-semibold text-slate-500">1. Lập luận ban đầu của bạn (Vòng 1):</div>
+              <p className="text-xs text-slate-700 bg-white p-3 rounded border border-slate-200 italic leading-relaxed">
+                "Mạng xã hội làm gia tăng tỷ lệ trầm cảm và hội chứng FOMO ở giới trẻ do sự so sánh xã hội liên tục..."
+              </p>
+            </div>
+
+            {/* 2. View AI analysis */}
+            <div className="space-y-1">
+              <div className="text-xs font-semibold text-amber-700">2. Phân tích của Trọng tài AI:</div>
+              <p className="text-xs text-amber-900 bg-amber-50/80 p-3 rounded border border-amber-200 leading-relaxed">
+                Lập luận thiếu trích dẫn nghiên cứu thực nghiệm. Hãy bổ sung báo cáo khảo sát hoặc số liệu định lượng (ví dụ: Viện Nghiên cứu Xã hội học 2025).
+              </p>
+            </div>
+
+            {/* 3. Rewrite argument */}
+            <div className="space-y-1">
+              <label className="block text-xs font-semibold text-slate-700">
+                3. Viết lại lập luận (Bổ sung dẫn chứng & số liệu cụ thể):
+              </label>
+              <textarea
+                rows={4}
+                value={rewrittenArg}
+                onChange={(e) => setRewrittenArg(e.target.value)}
+                className="w-full p-3 text-xs border border-slate-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 leading-relaxed"
+              />
+            </div>
+
+            {/* 4. Action buttons */}
+            <div className="flex items-center justify-between pt-1">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsImprovingArgument(false)}
+              >
+                Đóng
+              </Button>
+
+              <Button
+                variant="primary"
+                size="sm"
+                loading={reScoreLoading}
+                onClick={handleReEvaluate}
+              >
+                Chấm lại
+              </Button>
+            </div>
+
+            {/* 5. Compare previous score vs new score */}
+            {isEvaluated && (
+              <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    Kết quả chấm lại tiêu chí Dẫn chứng
+                  </span>
+                  <span className="text-xs font-extrabold text-emerald-600 bg-emerald-100/80 px-2 py-0.5 rounded">
+                    Tăng +2.5 điểm
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 text-xs pt-1">
+                  <div className="p-2.5 rounded bg-white border border-slate-200">
+                    <span className="text-slate-500">Điểm ban đầu:</span>
+                    <div className="font-bold text-slate-700 text-sm mt-0.5">6.0 / 10</div>
+                  </div>
+                  <div className="p-2.5 rounded bg-white border border-emerald-300">
+                    <span className="text-emerald-700 font-medium">Điểm mới sau cải thiện:</span>
+                    <div className="font-extrabold text-emerald-700 text-sm mt-0.5">8.5 / 10</div>
+                  </div>
+                </div>
+
+                <p className="text-xs text-emerald-900 leading-relaxed pt-1">
+                  Nhận xét: Lập luận mới đã bổ sung nguồn tham khảo uy tín và số liệu định lượng cụ thể, giúp gia tăng đáng kể sức nặng thuyết phục.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Strengths, Improvements & AI Feedback */}

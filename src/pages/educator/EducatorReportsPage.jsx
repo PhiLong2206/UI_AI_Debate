@@ -20,7 +20,7 @@ export const EducatorReportsPage = () => {
             Báo cáo Đánh giá Học viên (Lớp DEB101)
           </h2>
           <p className="text-sm text-[#64748B] mt-1">
-            Tổng hợp dữ liệu rèn luyện và phân tích năng lực tranh biện của sinh viên.
+            Quản lý chủ đề và theo dõi hoạt động luyện tập của học viên.
           </p>
         </div>
         <Button variant="outline" size="md" icon={Download}>
@@ -44,7 +44,7 @@ export const EducatorReportsPage = () => {
 
         <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 shadow-subtle">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Kỹ năng chung cần cải thiện</div>
-          <div className="text-xl font-extrabold text-amber-600 mt-1.5 truncate">Dẫn chứng (Evidence)</div>
+          <div className="text-xl font-extrabold text-amber-600 mt-1.5 truncate">Dẫn chứng</div>
           <div className="text-xs text-slate-500 font-medium mt-1">62% sinh viên điểm dẫn chứng &lt; 7.0</div>
         </div>
       </div>

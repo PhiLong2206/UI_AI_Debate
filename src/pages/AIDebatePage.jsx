@@ -287,12 +287,22 @@ Người trẻ chưa hoàn thiện về mặt tâm lý rất khó để tự ki�
         {/* CENTER COLUMN: DIỄN BIẾN (Timeline) */}
         <div className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-xl p-5 shadow-card flex flex-col justify-between overflow-y-auto max-h-[calc(100vh-280px)] lg:max-h-[calc(100vh-260px)]">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-              <div className="font-bold text-xs uppercase tracking-wider text-[#173B67] flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[#2563EB]" />
-                Diễn biến tranh luận
+            {/* Center Column Header & Round Context Instruction */}
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Tiến trình phiên tranh biện
+                </span>
+                <span className="text-[11px] text-slate-400 font-medium">Theo luật 3 vòng</span>
               </div>
-              <span className="text-[11px] text-slate-400 font-medium">Theo luật 3 vòng</span>
+
+              {!debateFinished && (
+                <div className="text-[11.5px] text-slate-700 bg-blue-50/80 border border-blue-200/80 px-3 py-1.5 rounded-md font-medium">
+                  {currentRound === 1 && "Mục tiêu: trình bày rõ lập trường và các luận điểm chính."}
+                  {currentRound === 2 && "Mục tiêu: phản hồi trực tiếp vào luận điểm gần nhất của đối thủ."}
+                  {currentRound === 3 && "Mục tiêu: tóm tắt lập trường và củng cố luận điểm mạnh nhất."}
+                </div>
+              )}
             </div>
 
             {/* Timeline Rounds */}

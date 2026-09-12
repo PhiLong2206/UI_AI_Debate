@@ -26,7 +26,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
   const learnerNavItems = [
     { to: '/tong-quan', label: 'Trang tổng quan', icon: LayoutDashboard },
     { to: '/chu-de', label: 'Chủ đề tranh biện', icon: BookOpen },
-    { to: '/chu-de', label: 'Tranh biện với AI', icon: Bot, isHighlighted: true },
+    { to: '/tranh-bien-ai', label: 'Tranh biện với AI', icon: Bot, isHighlighted: true },
     { to: '/tranh-bien/1v1', label: 'Tranh biện 1 vs 1', icon: Users2 },
     { to: '/tran-cua-toi', label: 'Trận của tôi', icon: History },
     { to: '/tien-do', label: 'Tiến độ học tập', icon: TrendingUp },

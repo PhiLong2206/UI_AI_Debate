@@ -11,6 +11,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { TopicListPage } from './pages/TopicListPage';
 import { TopicDetailPage } from './pages/TopicDetailPage';
 import { AIDebatePage } from './pages/AIDebatePage';
+import { AIDebateSetupPage } from './pages/AIDebateSetupPage';
 import { DebateResultPage } from './pages/DebateResultPage';
 import { PvpLobbyPage } from './pages/PvpLobbyPage';
 import { PvpDebatePage } from './pages/PvpDebatePage';
@@ -44,6 +45,7 @@ function App() {
             <Route path="/tong-quan" element={<DashboardPage />} />
             <Route path="/chu-de" element={<TopicListPage />} />
             <Route path="/chu-de/:id" element={<TopicDetailPage />} />
+            <Route path="/tranh-bien-ai" element={<AIDebateSetupPage />} />
             <Route path="/ket-qua/:id" element={<DebateResultPage />} />
             
             <Route path="/tranh-bien/1v1" element={<PvpLobbyPage />} />

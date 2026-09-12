@@ -56,6 +56,22 @@ export const TopicDetailPage = () => {
           {topic.summary}
         </p>
 
+        {/* Compact Practice Focus Section */}
+        <div className="pt-2 border-t border-slate-100 flex items-center gap-2 text-xs">
+          <span className="font-bold text-[#173B67] shrink-0">Bạn sẽ luyện tập:</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-medium">
+              • Xây dựng lập luận
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-medium">
+              • Phản biện trực tiếp
+            </span>
+            <span className="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-medium">
+              • Sử dụng dẫn chứng
+            </span>
+          </div>
+        </div>
+
         {/* Tab Navigation */}
         <div className="flex border-b border-slate-200 pt-2 text-xs font-semibold">
           <button
